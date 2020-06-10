@@ -9,11 +9,9 @@ io.on("connection", socket => {
 
   });
 
-  socket.on("send-message", ({ message, img } = {}) => {
-    //not sending image if image src is not a valid one
-    if(img && img.slice(0,4) != "data") img = null;
+  socket.on("send-message", ({ message, file } = {}) => {
 
-    if(message || img) {
+    if(message || file) {
 
       const response = {}
 
@@ -21,7 +19,7 @@ io.on("connection", socket => {
 
       if(message && message.replace(/ /g, "") != "") response.message = message;
 
-      if(img) response.img = img;
+      if(file) response.file = file;
 
       socket.broadcast.emit("chat-message", response);
     }

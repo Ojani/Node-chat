@@ -3,74 +3,52 @@ const socket = io("http://100.115.92.203:3000")
 const form = document.querySelector("form");
 const input = document.querySelector(".textbox");
 
+
 //form submit function
+//SENDING MESSAGE
 form.onsubmit = function(e) {
   e.preventDefault();
   const message = input.value;
 
   const data = {}
+  data.file = {}
 
   //checking if there is any text to send
   if(message.replace(/ /g, "") != "") {
     data.message = message;
 
+  } else {
+    data.message = null;
+
   }
 
   //checking if there is any image to send
-  if(imgPreviewer.src.slice(0,4) == "data") {
-    data.img = imgPreviewer.src;
+  const fileType = filePreviewWrapper.fileType;
+  data.file.type = fileType;
+
+  if(fileType == "image") {
+    data.file.src = imgPreviewer.src;
+
+  }else if (fileType == "video") {
+    data.file.src = vidPreviewer.src;
+
+  } else {
+    data.file = null;
 
   }
+  filePreviewWrapper.fileType = null;
+
 
   //sending data
-  if(message.replace(/ /g, "") != "" || imgPreviewer.src != "") {
+  if(data.message || data.file) {
     socket.emit("send-message", data);
-    appendMsg({ name: "You", message: data.message, img: data.img })
+    appendMsg({ name: "You", message: data.message, file: data.file })
     input.value = "";
 
-    removeImgPreview();
+    removeAttachment();
 
   }
-}
-
-//uploading file
-const fileBtn = document.querySelector(".fileBtn");
-fileBtn.onclick = fileBtn.value = null;
-fileBtn.onchange = fileChosen;
-
-//processing uploaded file
-function fileChosen() {
-  const reader = new FileReader();
-  const file = fileBtn.files[0];
-
-  reader.onload = function() {
-   //previewing image
-   previewImg(reader.result);
- };
-
- if (fileBtn) {
-   reader.readAsDataURL(file);
- }
-}
-
-//previewing selected image
-const imgPreviewer = document.querySelector(".imgPreviewer");
-const imgPreviewWrapper = document.querySelector(".imgPreviewWrapper");
-
-function previewImg(src) {
-  imgPreviewer.src = src;
-  imgPreviewWrapper.style.display = "block";
-
-}
-
-//removing image preview
-const romoveImgBtn = document.querySelector(".removeImgBtn");
-romoveImgBtn.onclick = removeImgPreview;
-
-function removeImgPreview() {
-  imgPreviewer.src = "";
-  imgPreviewWrapper.style.display = "none";
-
+  //end of sending form function
 }
 
 
@@ -79,14 +57,12 @@ function removeImgPreview() {
 //appending messages
 const messagesWrapper = document.querySelector(".messagesWrapper");
 
-function appendMsg({ name, message, img } = {}) {
+function appendMsg({ name, message, file } = {}) {
   const div = document.createElement("div");
 
-  //not using image if image src is not a valid one
-  if(img && img.slice(0,4) != "data") img = null;
 
   //doing nothing if there is no message and no image
-  if(!img && !message) return;
+  if(!file && !message) return;
 
   //adding the user's name
   if(name) {
@@ -97,14 +73,24 @@ function appendMsg({ name, message, img } = {}) {
 
   }
 
-  //adding image viewer if there is an image
-  if(img) {
-    const imgViewer = document.createElement("img");
-    imgViewer.className = "imgViewer";
+  //adding file viewer if there is a file
+  if(file) {
 
-    imgViewer.src = img;
+    if(file.type != "image" && file.type != "video") return;
 
-    div.append(imgViewer);
+    if(file.type == "image") var tag = "img";
+    else if(file.type == "video") var tag = "video";
+
+    const fileViewer = document.createElement(tag);
+
+    //in case it's a video
+    fileViewer.controls = true;
+
+    fileViewer.className = "fileViewer";
+
+    fileViewer.src = file.src;
+
+    div.append(fileViewer);
   }
 
   //adding text if there is any
@@ -116,7 +102,7 @@ function appendMsg({ name, message, img } = {}) {
   }
 
   //changing the style of chat bubble if it's not a user generated message
-  if(!name) div.className = "infoBox";
+  if(!name) { div.className = "infoBox"; }
 
   messagesWrapper.append(div);
   //end of appendMsg function
@@ -139,3 +125,81 @@ const userName = prompt("Enter a name") || "Guest";
 appendMsg({ message: "You connected!" });
 
 socket.emit("new-user", userName);
+
+
+
+
+
+//attachmentBtn
+const attachmentBtn = document.querySelector(".attachmentBtn");
+const exitAttachmentOptions = document.querySelector(".exitAttachmentOptions");
+
+attachmentBtn.addEventListener("click", toggleAttachmentOptions);
+exitAttachmentOptions.onclick = toggleAttachmentOptions;
+
+function toggleAttachmentOptions() {
+   document.querySelector(".attachmentOptions").classList.toggle("showAttachmentOptions")
+}
+
+//uploading file
+
+//images
+
+const fileBtn = document.querySelector(".fileBtn");
+fileBtn.onchange = fileChosen;
+
+
+//processing uploaded file
+function fileChosen() {
+  const reader = new FileReader();
+  const file = fileBtn.files[0];
+  const fileType = file.type.slice(0,5);
+
+  reader.onload = function() {
+
+   //previewing file
+   previewFile(reader.result, fileType);
+ };
+
+ if (fileBtn) {
+   reader.readAsDataURL(file);
+ }
+}
+
+
+//previewing selected image
+const imgPreviewer = document.querySelector(".imgPreviewer");
+const vidPreviewer = document.querySelector(".vidPreviewer");
+const filePreviewWrapper = document.querySelector(".filePreviewWrapper");
+
+function previewFile(src, type) {
+  fileBtn.value = "";
+
+  if(type != "image" && type != "video") return;
+
+  if(type == "image") {
+    imgPreviewer.src = src;
+    imgPreviewer.style.display = "block";
+
+  } else if(type == "video") {
+    vidPreviewer.src = src;
+    vidPreviewer.style.display = "block";
+
+  }
+
+  filePreviewWrapper.style.display = "block";
+  filePreviewWrapper.fileType = type;
+
+}
+
+//removing image preview
+const removeFileBtn = document.querySelector(".removeFileBtn");
+removeFileBtn.onclick = removeAttachment;
+
+function removeAttachment() {
+  imgPreviewer.src = "";
+  vidPreviewer.src = "";
+
+  document.querySelector(".filePreviewWrapper, .imgPreviewer, .vidPreviewer").style.display = "none";
+  filePreviewWrapper.type = null;
+}

@@ -6,10 +6,12 @@ body {
 
 .messagesWrapper {
   background: lightblue;
-  height: calc(100vh - 30px);
+  height: 100vh;
   overflow-x: hidden;
   overflow-x: scroll;
   font-size: 20px;
+  box-sizing: border-box;
+  padding-bottom: 100px;
 
 }
 
@@ -38,8 +40,8 @@ body {
 
 }
 
-.imgViewer {
-  max-height: 25vh;
+.fileViewer {
+  max-height: 50vh;
   max-width: 50vw;
   border: 2px solid black;
   border-radius: 10px;
@@ -50,60 +52,144 @@ body {
 
 
 form {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   background: #DDD;
   width: 100vw;
   padding: 10px;
   border-top: 2px solid black;
+  box-sizing: border-box;
 
 }
 
-.imgPreviewWrapper {
+.filePreviewWrapper {
   display: none;
   position: relative;
 
 }
 
-.removeImgBtn {
+.removeFileBtn, .exitAttachmentOptions {
   font-size: 20px;
   display: inline-block;
   position: absolute;
   top: 0;
   margin-left: 10px;
-  background: #CCC;
+  background: #fff;
   border-radius: 50%;
-  border: 1px solid black;
+  border: 2px solid black;
   font-weight: bolder;
   width: 20px;
   height: 20px;
   padding: 5px;
   text-align: center;
+  cursor: pointer;
+
+  transition: .3s;
 
 }
 
-.imgPreviewer {
+.removeFileBtn:hover, .exitAttachmentOptions:hover {
+  border: 2px solid white;
+  background: red;
+  color: white;
+
+}
+
+.exitAttachmentOptions {
+  margin-left: 0;
+  right: 10px;
+  top: 10px;
+
+}
+
+
+
+.imgPreviewer, .vidPreviewer {
   max-height: 25vh;
   border: 2px solid black;
   border-radius: 10px;
   position: relative;
+  display: none;
 
 }
 
 .textbox, button {
   border: 2px solid black;
   margin: 5px;
-  height: 30px;
   font-size: 25px;
 
 }
 
 .textbox {
   width: 55vw;
+  border-radius: 100px;
+  padding: 5px
 
 }
 
-button {
+.attachmentBtn, .cameraWrapper {
+  font-size: 28px;
+  cursor: pointer;
+  margin: 0 10px 0 10px;
+  transition: transform .3s;
+
+}
+
+.attachmentBtn:hover, .cameraWrapper:hover {
+  transform: scale(1.2) translateY(-15%);
+
+}
+
+.cameraWrapper {
+  display: inline-block;
+  overflow: hidden;
+  width: 28px;
+  height: 28px;
+  margin: 0 10px -2.5px 10px;
+  position: relative;
+
+}
+
+.fileBtn {
+  font-size: 50px;
+
+}
+
+#sendBtn {
+  cursor: pointer;
+  border-radius: 5px;
   display: inline;
+  padding: 5px;
+  background: #1588FF;
+  font-weight: bolder;
+  color: white;
+  transition: box-shadow .3s;
+
+}
+
+#sendBtn:hover {
+  box-shadow: 0 2px 7px rgba(0,0,0,.5);
+
+}
+
+
+
+
+.attachmentOptions {
+  position: fixed;
+  bottom: 0;
+  padding: 40px;
+  background: #ebfffd;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  width: 75vw;
+  border-radius: 0 10px 0 0;
+
+  transform: translateY(100%);
+  transition: transform .3s;
+}
+
+.showAttachmentOptions {
+  transform: translateY(0%);
 
 }
