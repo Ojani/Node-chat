@@ -1,0 +1,109 @@
+body {
+  font-family: arial;
+  margin: 0;
+
+}
+
+.messagesWrapper {
+  background: lightblue;
+  height: calc(100vh - 30px);
+  overflow-x: hidden;
+  overflow-x: scroll;
+  font-size: 20px;
+
+}
+
+.messagesWrapper div {
+  background: #F5F5DC;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(0,0,0,.5);
+  padding: 5px 10px 10px 15px;
+  margin: 15px;
+  width: 50vw;
+  word-wrap: break-word;
+
+}
+
+.messagesWrapper div b {
+  display: block;
+  font-size: 18px;
+
+}
+
+.infoBox {
+  background: skyblue !important;
+  text-align: center !important;
+  padding: 5px !important;
+
+}
+
+.imgViewer {
+  max-height: 25vh;
+  max-width: 50vw;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: block;
+  margin: 5px;
+
+}
+
+
+form {
+  position: fixed;
+  bottom: 0;
+  background: #DDD;
+  width: 100vw;
+  padding: 10px;
+  border-top: 2px solid black;
+
+}
+
+.imgPreviewWrapper {
+  display: none;
+  position: relative;
+
+}
+
+.removeImgBtn {
+  font-size: 20px;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  margin-left: 10px;
+  background: #CCC;
+  border-radius: 50%;
+  border: 1px solid black;
+  font-weight: bolder;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  text-align: center;
+
+}
+
+.imgPreviewer {
+  max-height: 25vh;
+  border: 2px solid black;
+  border-radius: 10px;
+  position: relative;
+
+}
+
+.textbox, button {
+  border: 2px solid black;
+  margin: 5px;
+  height: 30px;
+  font-size: 25px;
+
+}
+
+.textbox {
+  width: 55vw;
+
+}
+
+button {
+  display: inline;
+
+}

@@ -1,0 +1,17 @@
+{
+  "name": "inventory_management",
+  "version": "1.0.0",
+  "description": "practicing nodejs",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
