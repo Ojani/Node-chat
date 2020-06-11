@@ -49,7 +49,7 @@ form.onsubmit = function(e) {
   //sending data
   if(data.message || data.file) {
     socket.emit("send-message", data);
-    appendMsg({ name: "You", message: data.message, file: data.file });
+    appendMsg({ name: "You", message: data.message, file: data.file, sent: true });
 
     input.value = "";
 
@@ -64,7 +64,7 @@ form.onsubmit = function(e) {
 //appending messages
 const messagesWrapper = document.querySelector(".messagesWrapper");
 
-function appendMsg({ name, message, file } = {}) {
+function appendMsg({ name, message, file, info, sent } = {}) {
   const div = document.createElement("div");
 
   //doing nothing if there is no message and no image
@@ -135,7 +135,9 @@ function appendMsg({ name, message, file } = {}) {
   }
 
   //changing the style of chat bubble if it's not a user generated message
-  if(!name) { div.className = "infoBox"; }
+  if(info) div.className = "infoBox";
+  //changing style if it is the current user's messages
+  if(sent) div.className = "myMsg";
 
   messagesWrapper.append(div);
   //end of appendMsg function
@@ -148,14 +150,14 @@ socket.on("chat-message", data =>{
 });
 
 //displaying when a user connects
-socket.on("user-connected", name => {
-  appendMsg({ message: name })
+socket.on("user-connected", msg => {
+  appendMsg({ message: msg, info:true })
 
 });
 
 //giving the user a name
 const userName = prompt("Enter a name") || "Guest";
-appendMsg({ message: "You connected!" });
+appendMsg({ message: "You connected!", info: true });
 
 socket.emit("new-user", userName);
 
@@ -273,13 +275,12 @@ function removeAttachment() {
   vidPreviewer.src = "";
   docPreviewer.src = "";
 
+  filePreviewWrapper.fileType = null;
+  docPreviewer.extension = null;
+
   filePreviewWrapper.style.display = "none";
   imgPreviewer.style.display = "none";
   vidPreviewer.style.display = "none";
   docPreviewer.style.display = "none";
-
-  filePreviewWrapper.type = null;
-  docPreviewer.extension = null;
-  docPreviewer.src = null;
 
 }
