@@ -12,12 +12,49 @@
   </head>
   <body>
 
+
     <div class="messagesWrapper"></div>
 
+
     <form>
-      <div class="filePreviewWrapper"> <img class="imgPreviewer" src=""> <video class="vidPreviewer" src="" controls></video> <div class="removeFileBtn">X</div> </div>
-      <input class="textbox">  <span class="cameraWrapper"><input style="opacity: 0; position: absolute;" class="fileBtn" type="file" accept="image/*,video/*"> <i class="addImgBtn fas fa-camera"></i></span> <i class="attachmentBtn fas fa-paperclip"></i> <button type="submit" id="sendBtn">Send</button>
+
+      <div class="filePreviewWrapper">
+        <img class="imgPreviewer" src="">
+        <video class="vidPreviewer" src="" controls></video>
+        <div class="docPreviewer">
+          <i class="fas fa-file-alt"></i>
+          <br>
+          <b></b>
+        </div>
+        <div class="removeFileBtn">X</div>
+      </div>
+
+      <input class="textbox">
+
+      <span class="clipWrapper">
+        <input style="opacity: 0; position: absolute;" class="fileBtn" type="file" accept="image/*,video/*,audio/*,text/*,application/*">
+        <i class="addFileBtn fas fa-paperclip"></i>
+      </span>
+
+      <button type="submit" id="sendBtn">Send</button>
+
     </form>
+
+
+
+    <div class="docViewer">
+
+      <div class="docViewerHead">
+
+        <div class="exitDocBtn">X</div>
+
+      </div>
+
+      <iframe src="" width="100vw" height="90vh"></iframe>
+
+    </div>
+
+
 
     <div class="attachmentOptions">
 

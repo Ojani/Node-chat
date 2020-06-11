@@ -22,32 +22,39 @@ form.onsubmit = function(e) {
 
   }
 
-  //checking if there is any image to send
+  //checking if there is any image or video to send
   const fileType = filePreviewWrapper.fileType;
+
   data.file.type = fileType;
 
   if(fileType == "image") {
     data.file.src = imgPreviewer.src;
 
-  }else if (fileType == "video") {
+  } else if (fileType == "video") {
     data.file.src = vidPreviewer.src;
+
+  } else if(docPreviewer.src) {
+    data.file.src = docPreviewer.src;
+    data.file.extension = docPreviewer.extension;
+
+    data.file.type = "appli";
 
   } else {
     data.file = null;
 
   }
-  filePreviewWrapper.fileType = null;
+
 
 
   //sending data
   if(data.message || data.file) {
     socket.emit("send-message", data);
-    appendMsg({ name: "You", message: data.message, file: data.file })
+    appendMsg({ name: "You", message: data.message, file: data.file });
+
     input.value = "";
 
-    removeAttachment();
-
   }
+  removeAttachment();
   //end of sending form function
 }
 
@@ -59,7 +66,6 @@ const messagesWrapper = document.querySelector(".messagesWrapper");
 
 function appendMsg({ name, message, file } = {}) {
   const div = document.createElement("div");
-
 
   //doing nothing if there is no message and no image
   if(!file && !message) return;
@@ -73,25 +79,52 @@ function appendMsg({ name, message, file } = {}) {
 
   }
 
-  //adding file viewer if there is a file
+
+  //adding file viewer if there is an image or video
+  const validTypes = ["image", "video" ,"appli"];
+
   if(file) {
+    if(!validTypes.includes(file.type)) return;
 
-    if(file.type != "image" && file.type != "video") return;
+    if(!file.extension) {
 
-    if(file.type == "image") var tag = "img";
-    else if(file.type == "video") var tag = "video";
+      if(file.type == "image") var tag = "img";
+      else if(file.type == "video") var tag = "video";
 
-    const fileViewer = document.createElement(tag);
+      const fileViewer = document.createElement(tag);
 
-    //in case it's a video
-    fileViewer.controls = true;
+      //in case it's a video
+      fileViewer.controls = true;
 
-    fileViewer.className = "fileViewer";
+      fileViewer.className = "fileViewer";
 
-    fileViewer.src = file.src;
+      fileViewer.src = file.src;
+
+      div.append(fileViewer);
+    }
+  }
+
+  //adding a document viewer if available
+  if(file && file.extension) {
+    const fileViewer = document.createElement("span");
+    const i = document.createElement("i");
+    const br = document.createElement("br");
+    const b = document.createElement("b");
+
+    fileViewer.className = "docPreviewer";
+    fileViewer.style.display = "block";
+
+    fileViewer.innerHTML = `
+    <i class="fas fa-file-alt"></i>
+    <br>
+    <b>${file.extension}</b>`;
+
+    fileViewer.onclick = () => viewDocument(file.src);
 
     div.append(fileViewer);
+
   }
+
 
   //adding text if there is any
   if(message) {
@@ -131,7 +164,7 @@ socket.emit("new-user", userName);
 
 
 //attachmentBtn
-const attachmentBtn = document.querySelector(".attachmentBtn");
+/*const attachmentBtn = document.querySelector(".attachmentBtn");
 const exitAttachmentOptions = document.querySelector(".exitAttachmentOptions");
 
 attachmentBtn.addEventListener("click", toggleAttachmentOptions);
@@ -139,7 +172,7 @@ exitAttachmentOptions.onclick = toggleAttachmentOptions;
 
 function toggleAttachmentOptions() {
    document.querySelector(".attachmentOptions").classList.toggle("showAttachmentOptions")
-}
+}*/
 
 //uploading file
 
@@ -151,14 +184,19 @@ fileBtn.onchange = fileChosen;
 
 //processing uploaded file
 function fileChosen() {
+
   const reader = new FileReader();
   const file = fileBtn.files[0];
-  const fileType = file.type.slice(0,5);
+  var fileType = file.type.slice(0,5);
+  const extension = file.name.split(".").pop();
+
+  //handling txt files as documents
+  if(fileType == "text/") fileType = "appli";
 
   reader.onload = function() {
 
    //previewing file
-   previewFile(reader.result, fileType);
+   previewFile(reader.result, fileType, extension);
  };
 
  if (fileBtn) {
@@ -168,14 +206,19 @@ function fileChosen() {
 
 
 //previewing selected image
+const filePreviewWrapper = document.querySelector(".filePreviewWrapper");
 const imgPreviewer = document.querySelector(".imgPreviewer");
 const vidPreviewer = document.querySelector(".vidPreviewer");
-const filePreviewWrapper = document.querySelector(".filePreviewWrapper");
+const docPreviewer = document.querySelector(".docPreviewer");
+const docExtension =  document.querySelector(".docPreviewer b");
 
-function previewFile(src, type) {
+function previewFile(src, type, extension) {
   fileBtn.value = "";
 
-  if(type != "image" && type != "video") return;
+  if(type != "image" && type != "video" && type != "appli") return;
+
+  //removing any file that's already there if any
+  removeAttachment();
 
   if(type == "image") {
     imgPreviewer.src = src;
@@ -185,12 +228,41 @@ function previewFile(src, type) {
     vidPreviewer.src = src;
     vidPreviewer.style.display = "block";
 
+  } else if(type == "appli") {
+    docPreviewer.src = src;
+    docPreviewer.extension = extension;
+    docPreviewer.style.display = "block";
+    docExtension.innerText = extension;
+
   }
 
   filePreviewWrapper.style.display = "block";
   filePreviewWrapper.fileType = type;
 
 }
+
+//previewing documents
+const docViewer = document.querySelector(".docViewer");
+const exitDocBtn = document.querySelector(".exitDocBtn");
+const docIframe = document.querySelector(".docViewer iframe");
+const previewBtn = document.querySelector(".docPreviewer");
+
+previewBtn.onclick = () => viewDocument(previewBtn.src);
+
+function viewDocument(src) {
+  docViewer.style.display = "block";
+  docIframe.src = src;
+
+}
+
+//closing document previews
+exitDocBtn.onclick = closeDocument;
+function closeDocument() {
+  docViewer.style.display = "none";
+  docIframe.src = "";
+
+}
+
 
 //removing image preview
 const removeFileBtn = document.querySelector(".removeFileBtn");
@@ -199,7 +271,15 @@ removeFileBtn.onclick = removeAttachment;
 function removeAttachment() {
   imgPreviewer.src = "";
   vidPreviewer.src = "";
+  docPreviewer.src = "";
 
-  document.querySelector(".filePreviewWrapper, .imgPreviewer, .vidPreviewer").style.display = "none";
+  filePreviewWrapper.style.display = "none";
+  imgPreviewer.style.display = "none";
+  vidPreviewer.style.display = "none";
+  docPreviewer.style.display = "none";
+
   filePreviewWrapper.type = null;
+  docPreviewer.extension = null;
+  docPreviewer.src = null;
+
 }

@@ -47,6 +47,7 @@ body {
   border-radius: 10px;
   display: block;
   margin: 5px;
+  background: white;
 
 }
 
@@ -65,15 +66,16 @@ form {
 .filePreviewWrapper {
   display: none;
   position: relative;
+  padding-left: 15px;
 
 }
 
-.removeFileBtn, .exitAttachmentOptions {
+.removeFileBtn, .exitAttachmentOptions, .exitDocBtn {
   font-size: 20px;
   display: inline-block;
   position: absolute;
   top: 0;
-  margin-left: 10px;
+  margin-left: 50vh;
   background: #fff;
   border-radius: 50%;
   border: 2px solid black;
@@ -88,7 +90,7 @@ form {
 
 }
 
-.removeFileBtn:hover, .exitAttachmentOptions:hover {
+.removeFileBtn:hover, .exitAttachmentOptions:hover, .exitDocBtn:hover {
   border: 2px solid white;
   background: red;
   color: white;
@@ -106,12 +108,36 @@ form {
 
 .imgPreviewer, .vidPreviewer {
   max-height: 25vh;
+  max-width: 50vh;
   border: 2px solid black;
   border-radius: 10px;
   position: relative;
   display: none;
+  background: white;
 
 }
+
+.docPreviewer {
+  display: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #1588FF;
+  overflow: hidden;
+  word-wrap: break-word;
+  width: 12vw;
+
+}
+
+.docPreviewer .fa-file-alt {
+  font-size: 8vh;
+
+}
+
+.docPreviewer b {
+
+}
+
 
 .textbox, button {
   border: 2px solid black;
@@ -127,26 +153,22 @@ form {
 
 }
 
-.attachmentBtn, .cameraWrapper {
+.clipWrapper {
   font-size: 28px;
   cursor: pointer;
   margin: 0 10px 0 10px;
-  transition: transform .3s;
-
-}
-
-.attachmentBtn:hover, .cameraWrapper:hover {
-  transform: scale(1.2) translateY(-15%);
-
-}
-
-.cameraWrapper {
   display: inline-block;
   overflow: hidden;
   width: 28px;
   height: 28px;
   margin: 0 10px -2.5px 10px;
   position: relative;
+  transition: transform .3s;
+
+}
+
+.clipWrapper:hover {
+  transform: scale(1.2) translateY(-15%);
 
 }
 
@@ -191,5 +213,40 @@ form {
 
 .showAttachmentOptions {
   transform: translateY(0%);
+
+}
+
+
+
+.docViewer {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: white;
+  top: 0;
+
+}
+
+.exitDocBtn {
+  right: 10vw;
+  top: 10px;
+
+}
+
+.docViewerHead {
+  height: 55px;
+  font-size: 10vh;
+  padding-left: 10vw;
+  position: relative;
+  background: white;
+  box-shadow: 0 5px 10px rgba(0,0,0,.3);
+  position: relative;
+
+}
+
+.docViewer iframe {
+  width: 100vw;
+  height: 100vh;
 
 }
