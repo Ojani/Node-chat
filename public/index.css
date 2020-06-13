@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  font-family: arial;
+
+}
+
+.roomWrapper {
+  width: 35vw;
+  height: 25vw;
+  background: #fff;
+  box-shadow: 0 .3vw 1vw rgba(0,0,0,.7);
+  position: absolute;
+  left: 50vw;
+  transform: translate(-50%, 25%);
+
+}
+
+.wrapperTitle {
+  text-align: center;
+  padding: 1vw;
+  font-size: 2vw;
+  background: #b492fc;
+
+}
+
+form {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  top: 60%;
+
+}
+
+input {
+  display: block;
+  font-size: 1.5vw;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: .125vw solid grey;
+  padding: .5vw;
+
+}
+
+button {
+  font-size: 1.25vw;
+  background: #b492fc;
+  color: white;
+  border: none;
+  box-shadow: 0 .2vw .5vw rgba(0,0,0,.7);
+  cursor: pointer;
+  padding: .5vw .2vw .5vw .2vw;
+  margin-top: 1vw;
+  margin-left: 17.25%;
+  border-radius: .2vw;
+
+}
+
+.dropDownWrapper {
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  left: 17.25%;
+  width: 6vw;
+
+}
+
+.dropDownBtn {
+  padding: .5vw;
+  font-size: 1.5vw;
+  background: #b492fc;
+  color: white;
+  box-shadow: 0 .2vw .5vw rgba(0,0,0,.7);
+  cursor: pointer;
+  z-index: 10;
+
+}
+
+.menuList {
+  display: none;
+  max-height: 60vh;
+  overflow: scroll;
+  position: absolute;
+  z-index: 5;
+  box-shadow: 0 .2vw .5vw rgba(0,0,0,.7);
+
+}
+
+.dropDownWrapper:hover .menuList {
+  display: block;
+
+}
+
+.menuList a {
+  padding: .7vw;
+  background: white;
+  text-decoration: none;
+  color: black;
+  font-size: 1.5vw;
+  border-top: .1vw solid grey;
+  display: block;
+  width: 15vw;
+  max-height: 4.5vw;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-align: left;
+
+}
+
+.menuList a, .dropDownBtn, button {
+  transition: transform .3s, background-color .2s;
+
+}
+
+
+
+button:hover {
+transform: scale(1.1);
+
+}
+
+.menuList a:hover {
+  background: #EEE;
+
+}
+
+.note {
+  text-align: center;
+  font-size: .9vw;
+  padding: 0 10% 0 10%;
+  position: absolute;
+  bottom: 0;
+
+}

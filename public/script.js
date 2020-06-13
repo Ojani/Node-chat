@@ -1,6 +1,6 @@
-const socket = io("http://100.115.92.203:3000")
+const socket = io("http://localhost:3000")
 
-const form = document.querySelector("form");
+const form = document.querySelector(".textboxForm");
 const input = document.querySelector(".textbox");
 
 
@@ -48,7 +48,7 @@ form.onsubmit = function(e) {
 
   //sending data
   if(data.message || data.file) {
-    socket.emit("send-message", data);
+    socket.emit("send-message", data, roomName);
     appendMsg({ name: "You", message: data.message, file: data.file, sent: true });
 
     input.value = "";
@@ -159,7 +159,7 @@ socket.on("user-connected", msg => {
 const userName = prompt("Enter a name") || "Guest";
 appendMsg({ message: "You connected!", info: true });
 
-socket.emit("new-user", userName);
+socket.emit("new-user", userName, roomName);
 
 
 
@@ -284,3 +284,10 @@ function removeAttachment() {
   docPreviewer.style.display = "none";
 
 }
+
+
+//when a user diconnects
+socket.on("user-disconnected", name => {
+  appendMsg({ message: `${name} disconnected`, info: true });
+
+})

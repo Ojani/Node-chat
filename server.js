@@ -1,36 +1,99 @@
-const io = require("socket.io")(3000);
+const express = require('express');
+const app = express();
+//const server = require("http");
 
-const users = {}
+app.set("views", "./views");
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+
+const HOST = "localhost";
+const PORT = 3000;
+
+var server = app.listen(PORT, HOST, function(err) {
+  if (err) return console.log(err);
+  console.log("Listening at http://%s:%s", HOST, PORT);
+});
+
+const io = require("socket.io")(server);
+
+
+const rooms = { }
+
+
+app.get("/", (req, res) => {
+  res.render("index", { rooms: rooms });
+
+});
+
+app.post("/room", (req, res) => {
+  const room = req.body.room;
+
+  if(rooms[room] != null) {
+    return res.redirect(room);
+  }
+
+  if(room.replace(/ /g, "") == "") {
+    return res.redirect("/");
+  }
+
+  rooms[room] = { users: {  } };
+  res.redirect(room);
+  //send msg that new room was made
+  io.emit("room-created", room);
+
+});
+
+app.get("/:room", (req, res) => {
+  if(rooms[req.params.room] == null) {
+    return res.redirect("/");
+
+  }
+
+  res.render("room", { roomName: req.params.room });
+
+});
+
+
 
 io.on("connection", socket => {
-  socket.on("new-user",name => {
-    users[socket.id] = name;
-    socket.broadcast.emit("user-connected", `${name} connected!`)
+  socket.on("new-user", (name, room) => {
+    socket.join(room);
+    rooms[room].users[socket.id] = name;
+    socket.to(room).broadcast.emit("user-connected", `${name} connected!`);
 
   });
 
-  socket.on("send-message", ({ message, file } = {}) => {
+  socket.on("send-message", ({ message, file } = {}, room) => {
 
     if(message || file) {
 
       const response = {}
 
-      response.name = users[socket.id];
+      response.name = rooms[room].users[socket.id];
 
       if(message && message.replace(/ /g, "") != "") response.message = message;
 
       if(file) response.file = file;
 
-      socket.broadcast.emit("chat-message", response);
+      socket.to(room).broadcast.emit("chat-message", response);
     }
 
   })
 
   socket.on("disconnect", () => {
-    if(users[socket.id] != null) {
-      socket.broadcast.emit("chat-message", `${users[socket.id]} disconnected`);
-    }
+    getUserRooms(socket).forEach(room => {
+      socket.broadcast.emit("user-disconnected", rooms[room].users[socket.id]);
+      delete rooms[room].users[socket.id];
+    });
+  });
+});
 
-  })
+function getUserRooms(socket) {
+  return Object.entries(rooms).reduce((names, [name, room]) => {
+    if(room.users[socket.id] != null) names.push(name);
+    return names;
 
-})
+  }, []);
+
+}
