@@ -18,7 +18,7 @@ var server = app.listen(PORT, HOST, function(err) {
 const io = require("socket.io")(server);
 
 
-const rooms = { }
+const rooms = { Room1: { users: {} } }
 
 
 app.get("/", (req, res) => {
@@ -37,7 +37,7 @@ app.post("/room", (req, res) => {
     return res.redirect("/");
   }
 
-  rooms[room] = { users: {  } };
+  rooms[room] = { users: {} };
   res.redirect(room);
   //send msg that new room was made
   io.emit("room-created", room);
@@ -50,7 +50,7 @@ app.get("/:room", (req, res) => {
 
   }
 
-  res.render("room", { roomName: req.params.room });
+  res.render("room", { roomName: req.params.room, users: rooms[req.params.room].users });
 
 });
 
@@ -60,7 +60,7 @@ io.on("connection", socket => {
   socket.on("new-user", (name, room) => {
     socket.join(room);
     rooms[room].users[socket.id] = name;
-    socket.to(room).broadcast.emit("user-connected", `${name} connected!`);
+    socket.to(room).broadcast.emit("user-connected", name, socket.id);
 
   });
 
@@ -83,7 +83,7 @@ io.on("connection", socket => {
 
   socket.on("disconnect", () => {
     getUserRooms(socket).forEach(room => {
-      socket.broadcast.emit("user-disconnected", rooms[room].users[socket.id]);
+      socket.broadcast.emit("user-disconnected", rooms[room].users[socket.id], socket.id);
       delete rooms[room].users[socket.id];
     });
   });

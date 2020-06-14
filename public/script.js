@@ -150,16 +150,17 @@ socket.on("chat-message", data =>{
 });
 
 //displaying when a user connects
-socket.on("user-connected", msg => {
-  appendMsg({ message: msg, info:true })
-
+socket.on("user-connected", (name, id) => {
+  appendMsg({ message: `${name} connected!`, info:true });
+  userList.add(name, id);
 });
 
 //giving the user a name
-const userName = prompt("Enter a name") || "Guest";
+const userName = prompt("Enter a name.\nor default to guest") || "Guest"+(Math.floor(Math.random()*89999)+10000);
 appendMsg({ message: "You connected!", info: true });
 
 socket.emit("new-user", userName, roomName);
+userList.add(userName, 0);
 
 
 
@@ -287,7 +288,39 @@ function removeAttachment() {
 
 
 //when a user diconnects
-socket.on("user-disconnected", name => {
+socket.on("user-disconnected", (name, id) => {
   appendMsg({ message: `${name} disconnected`, info: true });
+  userList.remove(id);
 
-})
+});
+
+const userList = {
+  users: { },
+
+  add(name, id) {
+    this.users[id] = name;
+    addToList(name, id);
+  },
+
+  remove(id) {
+    delete this.users[id];
+    removeFromList(id);
+  }
+
+}
+
+function addToList(name, id) {
+  const div = document.createElement("div");
+  const p = document.createElement("p");
+
+  div.id = id;
+  div.className = "userBox";
+  p.innerText = name;
+  div.append(p);
+
+  document.querySelector(".usersList").append(div);
+}
+
+function removeFromList(id) {
+  document.querySelector(`#${id}`).remove();
+}

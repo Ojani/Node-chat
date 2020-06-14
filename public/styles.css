@@ -4,21 +4,67 @@ body {
 
 }
 
-.exitBtn {
+.navWrapper {
   position: fixed;
+  background: white;
+  border-right: .01vw solid grey;
+  height: 100vh;
+  width: 25vw;
+
+}
+
+.exitBtn {
+  position: absolute;
+  width: 100%;
   color: #1588FF;
   background: #fff;
   font-size: 1.25vw;
-  padding: .5vw .2vw .5vw .2vw;
-  border-radius: .3vw;
+  box-sizing: border-box;
+  padding: 1vw;
   cursor: pointer;
-  top: 1vw;
-  left: 1vw;
+  border-right: inherit;
+  top: 0;
+  text-align: center;
   text-decoration: none;
   box-shadow: 0 .1vw .4vw rgba(0,0,0,.7);
   transition: .3s;
 
 }
+
+.usersTab {
+  position: absolute;
+  top: 20vh;
+  width: 100%;
+  height: 80vh;
+
+}
+
+.usersTabTitle {
+  font-size: 2vw;
+  color: #333;
+  border-bottom: .01vw solid grey;
+  text-indent: .5vw;
+
+}
+
+.usersList {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+
+}
+
+.userBox {
+  height: 5vh;
+  border-bottom: .01vw solid grey;
+
+}
+
+.myUserBox {
+  background: #FEFEFE;
+
+}
+
 
 .exitBtn:hover {
   background: #EFEFEF;
@@ -33,6 +79,9 @@ body {
   font-size: 20px;
   box-sizing: border-box;
   padding-bottom: 100px;
+  width: 75vw;
+  position: absolute;
+  right: 0;
 
 }
 
@@ -58,8 +107,9 @@ body {
   background: skyblue !important;
   text-align: center !important;
   padding: 5px !important;
-  margin: 15px 0 15px 25vw !important;
+  margin: 15px 0 15px 50% !important;
   border-radius: 100vw !important;
+  transform: translate(-50%, 0);
 
 }
 
@@ -86,10 +136,11 @@ body {
   position: absolute;
   bottom: 0;
   background: #fff;
-  width: 100vw;
+  width: 75vw;
   padding: 10px 10px 10px 10%;
   border-top: 2px solid black;
   box-sizing: border-box;
+  right: 0;
 
 }
 

@@ -14,65 +14,90 @@
   </head>
   <body>
 
-    <a href="/" class="exitBtn">Exit room</a>
+    <div class="navWrapper">
 
-    <div class="messagesWrapper"></div>
+      <a href="/" class="exitBtn">Exit room</a>
 
+      <div class="usersTab">
 
-    <form class="textboxForm">
+        <div class="usersTabTitle">Users</div>
 
-      <div class="filePreviewWrapper">
-        <img class="imgPreviewer" src="">
-        <video class="vidPreviewer" src="" controls></video>
-        <div class="docPreviewer">
-          <i class="fas fa-file-alt"></i>
-          <br>
-          <b></b>
+        <div class="usersList">
+
+          <% Object.keys(users).forEach(user => { %>
+            <div class="userBox" id="<%= user %>">
+
+            <p class="name"> <%= users[user] %> </p>
+
+            </div>
+          <% }) %>
+
         </div>
-        <div class="removeFileBtn">X</div>
-      </div>
-
-      <div class="formWrapper">
-
-        <input class="textbox">
-
-        <span class="clipWrapper">
-          <input style="opacity: 0; position: absolute;" class="fileBtn" type="file" accept="image/*,video/*,audio/*,text/*,application/*">
-          <i class="addFileBtn fas fa-paperclip"></i>
-        </span>
-
-        <button type="submit" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
 
       </div>
-
-    </form>
-
-
-
-    <div class="docViewer">
-
-      <div class="docViewerHead">
-
-        <div class="exitDocBtn">X</div>
-
-      </div>
-
-      <iframe src="" width="100vw" height="90vh"></iframe>
 
     </div>
 
 
+    <div class="chatWrapper">
 
-    <div class="attachmentOptions">
+      <div class="messagesWrapper"></div>
 
-      <div class="exitAttachmentOptions">X</div>
 
-      <i class="addImgBtn fas fa-camera"></i>
-      <input style="opacity: 0" class="fileBtn" type="file">
+      <form class="textboxForm">
+
+        <div class="filePreviewWrapper">
+          <img class="imgPreviewer" src="">
+          <video class="vidPreviewer" src="" controls></video>
+          <div class="docPreviewer">
+            <i class="fas fa-file-alt"></i>
+            <br>
+            <b></b>
+          </div>
+          <div class="removeFileBtn">X</div>
+        </div>
+
+        <div class="formWrapper">
+
+          <input class="textbox">
+
+          <span class="clipWrapper">
+            <input style="opacity: 0; position: absolute;" class="fileBtn" type="file" accept="image/*,video/*,audio/*,text/*,application/*">
+            <i class="addFileBtn fas fa-paperclip"></i>
+          </span>
+
+          <button type="submit" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+
+        </div>
+
+      </form>
+
+
+
+      <div class="docViewer">
+
+        <div class="docViewerHead">
+
+          <div class="exitDocBtn">X</div>
+
+        </div>
+
+        <iframe src="" width="100vw" height="90vh"></iframe>
+
+      </div>
+
+
+
+      <div class="attachmentOptions">
+
+        <div class="exitAttachmentOptions">X</div>
+
+        <i class="addImgBtn fas fa-camera"></i>
+        <input style="opacity: 0" class="fileBtn" type="file">
+
+      </div>
 
     </div>
-
-
 
   </body>
 </html>
