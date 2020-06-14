@@ -4,6 +4,39 @@ const form = document.querySelector(".textboxForm");
 const input = document.querySelector(".textbox");
 
 
+//user list
+const userList = {
+  users: { },
+
+  add(name, id) {
+    this.users[id] = name;
+    addToList(name, id);
+  },
+
+  remove(id) {
+    delete this.users[id];
+    removeFromList(id);
+  }
+
+}
+
+function addToList(name, id) {
+  const div = document.createElement("div");
+  const p = document.createElement("p");
+
+  div.id = id;
+  div.className = "userBox";
+  p.innerText = name;
+  div.append(p);
+
+  document.querySelector(".usersList").append(div);
+}
+
+function removeFromList(id) {
+  document.querySelector(`#${id}`).remove();
+}
+
+
 //form submit function
 //SENDING MESSAGE
 form.onsubmit = function(e) {
@@ -293,34 +326,3 @@ socket.on("user-disconnected", (name, id) => {
   userList.remove(id);
 
 });
-
-const userList = {
-  users: { },
-
-  add(name, id) {
-    this.users[id] = name;
-    addToList(name, id);
-  },
-
-  remove(id) {
-    delete this.users[id];
-    removeFromList(id);
-  }
-
-}
-
-function addToList(name, id) {
-  const div = document.createElement("div");
-  const p = document.createElement("p");
-
-  div.id = id;
-  div.className = "userBox";
-  p.innerText = name;
-  div.append(p);
-
-  document.querySelector(".usersList").append(div);
-}
-
-function removeFromList(id) {
-  document.querySelector(`#${id}`).remove();
-}
