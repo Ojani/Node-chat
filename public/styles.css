@@ -4,6 +4,11 @@ body {
 
 }
 
+input:focus, button:focus {
+  outline: none;
+  
+}
+
 .burgerMenu {
   display: none;
   position: fixed;
