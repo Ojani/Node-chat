@@ -4,10 +4,37 @@ body {
 
 }
 
+.burgerMenu {
+  display: none;
+  position: fixed;
+  top: .65em;
+  left: .65em;
+  width: 2.25em;
+  height: 1.75em;
+  z-index: 2;
+  cursor: pointer;
+
+}
+
+.burgerMenu div {
+  width: 100%;
+  height: 20%;
+  margin-top: 12%;
+  margin-bottom: 12%;
+  background: black;
+
+}
+
+.burgerMenu div:first-child {
+  margin-top: 0;
+
+}
+
 .navWrapper {
   position: fixed;
   background: white;
   border-right: .01vw solid grey;
+  transition: transform .3s;
   height: 100vh;
   width: 25vw;
 
@@ -18,9 +45,9 @@ body {
   width: 100%;
   color: #1588FF;
   background: #fff;
-  font-size: 1.25vw;
+  font-size: .95em;
   box-sizing: border-box;
-  padding: 1vw;
+  padding: 1em;
   cursor: pointer;
   border-right: inherit;
   top: 0;
@@ -40,7 +67,7 @@ body {
 }
 
 .usersTabTitle {
-  font-size: 2vw;
+  font-size: 2em;
   color: #333;
   border-bottom: .01vw solid grey;
   text-indent: .5vw;
@@ -55,13 +82,15 @@ body {
 }
 
 .userBox {
-  height: 5vh;
+  box-sizing: border-box;
+  padding: 1vh;
   border-bottom: .01vw solid grey;
+  border-right: .01vw solid grey;
 
 }
 
 .myUserBox {
-  background: #FEFEFE;
+  background: #c3ffa9;
 
 }
 
@@ -76,7 +105,7 @@ body {
   height: 100vh;
   overflow-x: hidden;
   overflow-x: scroll;
-  font-size: 20px;
+  font-size: 1em;
   box-sizing: border-box;
   padding-bottom: 100px;
   width: 75vw;
@@ -99,7 +128,7 @@ body {
 
 .messagesWrapper div b {
   display: block;
-  font-size: 18px;
+  font-size: .8em;
 
 }
 
@@ -137,7 +166,6 @@ body {
   bottom: 0;
   background: #fff;
   width: 75vw;
-  padding: 10px 10px 10px 10%;
   border-top: 2px solid black;
   box-sizing: border-box;
   right: 0;
@@ -152,7 +180,7 @@ body {
 }
 
 .removeFileBtn, .exitAttachmentOptions, .exitDocBtn {
-  font-size: 20px;
+  font-size: 1em;
   display: inline-block;
   position: absolute;
   top: 0;
@@ -161,9 +189,9 @@ body {
   border-radius: 50%;
   border: 2px solid black;
   font-weight: bolder;
-  width: 20px;
-  height: 20px;
-  padding: 5px;
+  width: 1em;
+  height: 1em;
+  padding: .25em;
   text-align: center;
   cursor: pointer;
 
@@ -218,17 +246,14 @@ body {
 
 .formWrapper {
   position: relative;
-
+  width: 100%;
+  padding: 10px 0 10px 0;
+  text-align: center;
 }
 
 .textbox {
   border: 2px solid grey;
-  margin: 5px;
-  font-size: 25px;
-
-}
-
-.textbox {
+  font-size: 1.25em;
   width: 75%;
   border-radius: 100px;
   padding: 5px;
@@ -236,15 +261,13 @@ body {
 }
 
 .clipWrapper {
-  font-size: 28px;
+  font-size: 1.2em;
   cursor: pointer;
-  margin: 0 10px 0 10px;
+  margin: 0 .3em 0 .3em;
   display: inline-block;
   overflow: hidden;
-  width: 28px;
-  height: 28px;
-  margin: 0 10px -2.5px 0;
-  position: relative;
+  width: 1.4em;
+  height: 1.4em;  position: relative;
   transition: transform .3s;
 
 }
@@ -254,8 +277,8 @@ body {
 
 }
 
-.fileBtn {
-  font-size: 50px;
+.addFileBtn {
+  font-size: 1.3em;
 
 }
 
@@ -265,16 +288,13 @@ body {
   border-radius: 100%;
   display: inline;
   background: #1588FF;
-  font-size: 25px;
-  width: 50px;
-  height: 50px;
-  padding: 10px 12.5px 10px 7.5px;
+  font-size: 1.2em;
+  width: 2em;
+  height: 2em;
+  padding: .5em .6em .5em .4em;
   color: white;
   transition: box-shadow .3s;
   text-align: center;
-  position: absolute;
-  transform: translate(0, -50%);
-  top: 50%;
 
 }
 
@@ -337,5 +357,105 @@ body {
 .docViewer iframe {
   width: 100vw;
   height: 100vh;
+
+}
+
+
+@media only screen and (max-width: 850px) {
+  .navWrapper {
+    transform: translate(-100%, 0);
+    width: 35vw;
+    z-index: 1;
+
+  }
+
+  .navWrapper.show {
+    transform: translate(0, 0);
+
+  }
+
+  .messagesWrapper {
+    width: 100vw;
+
+  }
+
+  .textboxForm {
+    width: 100vw;
+
+  }
+
+  .burgerMenu {
+    display: initial;
+
+  }
+
+}
+
+@media only screen and (max-width: 640px) {
+  .navWrapper {
+    width: 50vw;
+
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+  .messagesWrapper {
+    font-size: .85em;
+
+  }
+
+}
+
+@media only screen and (max-width: 370px) {
+  .messagesWrapper div {
+    width: 75%;
+
+  }
+
+  .myMsg {
+    margin-left: calc(25% - 15px) !important;
+
+  }
+
+}
+
+@media only screen and (max-width: 480px) {
+  .textbox {
+    width: 60%;
+
+  }
+
+}
+
+@media only screen and (max-width: 440px) {
+  .navWrapper {
+    width: 70vw;
+
+  }
+
+}
+
+@media only screen and (max-width: 370px) {
+  .formWrapper {
+    font-size: .75em;
+
+  }
+
+}
+
+@media only screen and (max-width: 300px) {
+  .navWrapper {
+    width: 100vw;
+
+  }
+
+}
+
+@media only screen and (max-width: 250px) {
+  .formWrapper {
+    font-size: .5em;
+
+  }
 
 }

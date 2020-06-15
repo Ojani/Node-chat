@@ -8,9 +8,9 @@ const input = document.querySelector(".textbox");
 const userList = {
   users: { },
 
-  add(name, id) {
+  add(name, id, currentUser) {
     this.users[id] = name;
-    addToList(name, id);
+    addToList(name, id, currentUser);
   },
 
   remove(id) {
@@ -20,7 +20,7 @@ const userList = {
 
 }
 
-function addToList(name, id) {
+function addToList(name, id, currentUser) {
   const div = document.createElement("div");
   const p = document.createElement("p");
 
@@ -28,6 +28,9 @@ function addToList(name, id) {
   div.className = "userBox";
   p.innerText = name;
   div.append(p);
+
+  //changing div style if it is the one of the current users
+  if(currentUser) div.classList.add("myUserBox");
 
   document.querySelector(".usersList").append(div);
 }
@@ -193,7 +196,7 @@ const userName = prompt("Enter a name.\nor default to guest") || "Guest"+(Math.f
 appendMsg({ message: "You connected!", info: true });
 
 socket.emit("new-user", userName, roomName);
-userList.add(userName, 0);
+userList.add(userName, 0, true);
 
 
 
@@ -326,3 +329,14 @@ socket.on("user-disconnected", (name, id) => {
   userList.remove(id);
 
 });
+
+
+
+
+
+//Sowing navWrapper
+const navWrapper = document.querySelector(".navWrapper");
+document.querySelector(".burgerMenu").onclick = () => {
+  navWrapper.classList.toggle("show");
+
+}
