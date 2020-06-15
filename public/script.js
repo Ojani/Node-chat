@@ -343,8 +343,11 @@ socket.on("user-disconnected", (name, id) => {
 
 //Sowing navWrapper
 const navWrapper = document.querySelector(".navWrapper");
-document.querySelector(".burgerMenu").onclick = () => {
+const burgerBtn = document.querySelector(".burgerMenu");
+
+burgerBtn.onclick = () => {
   navWrapper.classList.toggle("show");
+  burgerBtn.classList.toggle("turn2x");
 
 }
 

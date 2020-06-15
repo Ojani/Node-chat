@@ -21,11 +21,27 @@ body {
   margin-top: .5em;
   margin-bottom: .5em;
   background: #333;
+  transition: transform .3s;
 
 }
 
 .burgerMenu div:first-child {
   margin-top: 0;
+
+}
+
+.turn2x div:first-child {
+  transform: translateY(.68em) rotate(45deg);
+
+}
+
+.turn2x div:last-child {
+  transform: translateY(-.68em) rotate(-45deg);
+
+}
+
+.turn2x div:nth-child(2) {
+  opacity: 0;
 
 }
 
@@ -444,7 +460,7 @@ body {
 
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 485px) {
   .textbox {
     width: 60%;
 

@@ -114,8 +114,8 @@ button {
 
 
 
-button:hover {
-transform: scale(1.1);
+button:hover, .dropDownBtn:hover {
+  background: #a381eb;
 
 }
 
