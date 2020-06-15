@@ -175,7 +175,14 @@ function appendMsg({ name, message, file, info, sent } = {}) {
   //changing style if it is the current user's messages
   if(sent) div.className = "myMsg";
 
+  //scrolling to bottom
+  var scroll = false
+  if(messagesWrapper.scrollTop > messagesWrapper.scrollHeight-window.innerHeight*1.5) scroll = true;
+
   messagesWrapper.append(div);
+
+  if(scroll) scrollToBottom();
+
   //end of appendMsg function
 }
 
@@ -338,5 +345,24 @@ socket.on("user-disconnected", (name, id) => {
 const navWrapper = document.querySelector(".navWrapper");
 document.querySelector(".burgerMenu").onclick = () => {
   navWrapper.classList.toggle("show");
+
+}
+
+//chat scrolling
+const scrollBtn = document.querySelector(".scrollToBottom");
+scrollBtn.onclick = scrollToBottom;
+
+function scrollToBottom() {
+  messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
+
+}
+
+//showing scroll button when useer scrolls up;
+messagesWrapper.onscroll = () => {
+  if(messagesWrapper.scrollTop < messagesWrapper.scrollHeight-window.innerHeight*1.5) {
+    scrollBtn.classList.add("show");
+  }else {
+    scrollBtn.classList.remove("show");
+  }
 
 }

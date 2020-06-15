@@ -10,7 +10,6 @@ body {
   top: .65em;
   left: .65em;
   width: 2.25em;
-  height: 1.75em;
   z-index: 2;
   cursor: pointer;
 
@@ -18,10 +17,10 @@ body {
 
 .burgerMenu div {
   width: 100%;
-  height: 20%;
-  margin-top: 12%;
-  margin-bottom: 12%;
-  background: black;
+  height: .2em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  background: #333;
 
 }
 
@@ -55,6 +54,11 @@ body {
   text-decoration: none;
   box-shadow: 0 .1vw .4vw rgba(0,0,0,.7);
   transition: .3s;
+
+}
+
+.exitBtn:hover {
+  background: #EFEFEF;
 
 }
 
@@ -94,11 +98,30 @@ body {
 
 }
 
-
-.exitBtn:hover {
-  background: #EFEFEF;
+.scrollToBottom {
+  position: fixed;
+  right: 1em;
+  bottom: 3em;
+  font-size: 2em;
+  z-index: 1;
+  color: #1588ff;
+  background: white;
+  padding: .05em .1em .05em .1em;
+  box-sizing: border-box;
+  box-shadow: 0 .1vw .4vw rgba(0,0,0,.7);
+  border-radius: .2em;
+  cursor: pointer;
+  display: none;
+  opacity: 0;
 
 }
+
+.scrollToBottom.show {
+  display: initial;
+  opacity: 1;
+
+}
+
 
 .messagesWrapper {
   background: #ffffeb;
@@ -111,6 +134,7 @@ body {
   width: 75vw;
   position: absolute;
   right: 0;
+  scroll-behavior: smooth;
 
 }
 
