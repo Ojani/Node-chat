@@ -5,10 +5,10 @@ body {
 }
 
 .roomWrapper {
-  width: 35vw;
-  height: 25vw;
+  width: 26.88em;
+  height: 19.2em;
   background: #fff;
-  box-shadow: 0 .3vw 1vw rgba(0,0,0,.7);
+  box-shadow: 0 .2304em .768em rgba(0,0,0,.7);
   position: absolute;
   left: 50vw;
   transform: translate(-50%, 25%);
@@ -17,8 +17,8 @@ body {
 
 .wrapperTitle {
   text-align: center;
-  padding: 1vw;
-  font-size: 2vw;
+  padding: .768em;
+  font-size: 1.536em;
   background: #b492fc;
 
 }
@@ -33,26 +33,26 @@ form {
 
 input {
   display: block;
-  font-size: 1.5vw;
+  font-size: 1.152em;
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
-  border: .125vw solid grey;
-  padding: .5vw;
+  border: .096em solid grey;
+  padding: .384em;
 
 }
 
 button {
-  font-size: 1.25vw;
+  font-size: .96em;
   background: #b492fc;
   color: white;
   border: none;
-  box-shadow: 0 .2vw .5vw rgba(0,0,0,.7);
+  box-shadow: 0 .1536em 0.384em rgba(0,0,0,.7);
   cursor: pointer;
-  padding: .5vw .2vw .5vw .2vw;
-  margin-top: 1vw;
+  padding: 0.384em .1536em 0.384em .1536em;
+  margin-top: .768em;
   margin-left: 17.25%;
-  border-radius: .2vw;
+  border-radius: .1536em;
 
 }
 
@@ -61,16 +61,16 @@ button {
   position: absolute;
   top: 30%;
   left: 17.25%;
-  width: 6vw;
+  width: 4.608em;
 
 }
 
 .dropDownBtn {
-  padding: .5vw;
-  font-size: 1.5vw;
+  padding: 0.384em;
+  font-size: 1.0384em;
   background: #b492fc;
   color: white;
-  box-shadow: 0 .2vw .5vw rgba(0,0,0,.7);
+  box-shadow: 0 .1536em 0.384em rgba(0,0,0,.7);
   cursor: pointer;
   z-index: 10;
 
@@ -82,7 +82,7 @@ button {
   overflow: scroll;
   position: absolute;
   z-index: 5;
-  box-shadow: 0 .2vw .5vw rgba(0,0,0,.7);
+  box-shadow: 0 .1536em 0.384em rgba(0,0,0,.7);
 
 }
 
@@ -92,15 +92,15 @@ button {
 }
 
 .menuList a {
-  padding: .7vw;
+  padding: .5376em;
   background: white;
   text-decoration: none;
   color: black;
-  font-size: 1.5vw;
-  border-top: .1vw solid grey;
+  font-size: 1.0384em;
+  border-top: .0768em solid grey;
   display: block;
-  width: 15vw;
-  max-height: 4.5vw;
+  width: 11.52em;
+  max-height: 40.384em;
   overflow: hidden;
   word-wrap: break-word;
   text-align: left;
@@ -126,9 +126,68 @@ transform: scale(1.1);
 
 .note {
   text-align: center;
-  font-size: .9vw;
+  font-size: .6912em;
   padding: 0 10% 0 10%;
   position: absolute;
   bottom: 0;
+
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: .9rem;
+
+  }
+
+}
+
+@media only screen and (max-width: 520px) {
+  body {
+    font-size: 1rem;
+
+  }
+
+  .roomWrapper {
+    transform: initial;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+
+  }
+
+  form {
+    top: 50%;
+
+  }
+
+  input {
+    width: 75%;
+    box-sizing: border-box;
+
+  }
+
+  button, .dropDownWrapper {
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    width: 75%;
+    left: 0;
+
+  }
+
+  .note {
+    transform: translate(-50%, 0);
+    left: 50vw;
+    width: 90%;
+
+  }
+
+}
+
+@media only screen and (max-width: 300px) {
+  .wrapperTitle {
+    padding: .2em;
+    font-size: 1.536em;
+
+  }
 
 }
