@@ -1,5 +1,5 @@
 if(window.location.hostname == "localhost") {
-  var socket = io.connect("http://localhost:3000");
+  var socket = io.connect("http://localhost:"+location.port);
 
 } else {
   var socket = io.connect(window.location.hostname);

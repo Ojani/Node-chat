@@ -7,7 +7,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-const HOST = "localhost";
+const HOST = "0.0.0.0";
 const PORT = process.env.PORT || 3000;
 
 var server = app.listen(PORT, HOST, function(err) {
