@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-//const server = require("http");
+
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
@@ -8,7 +8,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const HOST = "localhost";
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 var server = app.listen(PORT, HOST, function(err) {
   if (err) return console.log(err);

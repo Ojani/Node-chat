@@ -1,4 +1,10 @@
-const socket = io("http://localhost:3000")
+if(window.location.hostname == "localhost") {
+  var socket = io.connect("http://localhost:3000");
+
+} else {
+  var socket = io.connect(window.location.hostname);
+
+}
 
 const menuList = document.querySelector(".menuList");
 
