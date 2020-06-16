@@ -344,6 +344,14 @@ socket.on("user-disconnected", (name, id) => {
 });
 
 
+//redirecting to landing page when you disconnect
+socket.on("disconnect", () => {
+  window.locaction.href = "../";
+  alert("Disconnected from server...");
+
+});
+
+
 
 
 
