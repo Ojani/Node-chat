@@ -1,6 +1,14 @@
+html {
+  width: 100%;
+  overflow: hidden;
+
+}
+
 body {
   margin: 0;
   font-family: arial;
+  width: 100%;
+  overflow: hidden;
 
 }
 
@@ -136,8 +144,7 @@ button:hover, .dropDownBtn:hover {
 @media only screen and (max-width: 600px) {
   body {
     font-size: .9rem;
-    width: 100%;
-    overflow: hidden;
+
 
   }
 
