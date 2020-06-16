@@ -22,9 +22,11 @@ const joinBtn = document.querySelector(".dropDownBtn");
 document.onclick = e => {
   if(e.target.className == "dropDownBtn") {
     document.querySelector(".menuList").style.display = "block";
+    stopPropagation();
 
   } else {
     document.querySelector(".menuList").style.display = "none";
+    stopPropagation();
 
   }
 
