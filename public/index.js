@@ -19,15 +19,13 @@ socket.on("room-created", room => {
 //add support for mobile since hovering wont work
 const joinBtn = document.querySelector(".dropDownBtn");
 
-document.onclick = e => {
-  if(e.target.className == "dropDownBtn") {
-    document.querySelector(".menuList").style.display = "block";
-    document.querySelector("input").style.display = "none";
+joinBtn.onclick = () => {
+  menuList.classList.toggle("show");
 
-  } else {
-    document.querySelector(".menuList").style.display = "none";
-    document.querySelector("input").style.display = "block";
-
+  if(menuList.classList.contains("show")) {
+    joinBtn.innerText = "Close";
+  }else {
+    joinBtn.innerText = "Join";
   }
 
 }

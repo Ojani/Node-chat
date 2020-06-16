@@ -89,11 +89,6 @@ button {
 
 }
 
-.dropDownWrapper:hover .menuList {
-  display: block;
-
-}
-
 .menuList a {
   padding: .5376em;
   background: white;
@@ -133,6 +128,16 @@ button:hover, .dropDownBtn:hover {
   padding: 0 10% 0 10%;
   position: absolute;
   bottom: 0;
+
+}
+
+
+
+@media only screen and (min-width: 601px) {
+  .dropDownWrapper:hover .menuList {
+    display: block;
+
+  }
 
 }
 
@@ -184,6 +189,11 @@ button:hover, .dropDownBtn:hover {
   .menuList, .menuList a {
     box-sizing: border-box;
     width: 100%;
+
+  }
+
+  .menuList.show {
+    display: block;
 
   }
 
