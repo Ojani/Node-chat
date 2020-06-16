@@ -1,9 +1,3 @@
-html {
-  width: 100%;
-  overflow: hidden;
-
-}
-
 body {
   margin: 0;
   font-family: arial;
@@ -17,7 +11,7 @@ body {
   height: 19.2em;
   background: #fff;
   box-shadow: 0 .2304em .768em rgba(0,0,0,.7);
-  position: absolute;
+  position: fixed;
   left: 50vw;
   transform: translate(-50%, 25%);
 
