@@ -145,8 +145,9 @@ body {
   overflow-x: hidden;
   overflow-x: scroll;
   font-size: 1em;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  padding-bottom: 100px;
+  padding-bottom: 5em;
   width: 75vw;
   position: absolute;
   right: 0;
