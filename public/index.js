@@ -6,6 +6,7 @@ if(window.location.hostname == "localhost") {
 
 }
 
+//adding links to added chat rooms
 const menuList = document.querySelector(".menuList");
 
 socket.on("room-created", room => {
@@ -14,3 +15,23 @@ socket.on("room-created", room => {
   a.href = room;
   menuList.append(a);
 });
+
+//add support for mobile since hovering wont work
+const joinBtn = document.querySelector(".dropDownBtn");
+
+document.onclick = e => {
+  if(e.target.className == "dropDownBtn") {
+    document.querySelector(".menuList").style.display = "block";
+
+  } else {
+    document.querySelector(".menuList").style.display = "none";
+
+  }
+
+}
+
+//removing touch alternative if user has mouse
+document.onmousemove = () => {
+  document.onmousemove = document.onclick = null;
+
+}

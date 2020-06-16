@@ -150,6 +150,7 @@ button:hover, .dropDownBtn:hover {
   }
 
   .roomWrapper {
+    box-shadow: initial;
     transform: initial;
     width: 100vw;
     height: 100vh;
