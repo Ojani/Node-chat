@@ -431,7 +431,7 @@ body {
 
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (width < 640px) {
   .navWrapper {
     width: 50vw;
 
@@ -439,7 +439,7 @@ body {
 
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (width < 500px) {
   .messagesWrapper {
     font-size: .85em;
 
@@ -447,7 +447,7 @@ body {
 
 }
 
-@media only screen and (max-width: 370px) {
+@media only screen and (width < 370px) {
   .messagesWrapper div {
     width: 75%;
 
@@ -460,7 +460,7 @@ body {
 
 }
 
-@media only screen and (max-width: 485px) {
+@media only screen and (width < 485px) {
   .textbox {
     width: 60%;
 
@@ -468,7 +468,7 @@ body {
 
 }
 
-@media only screen and (max-width: 440px) {
+@media only screen and (width < 440px) {
   .navWrapper {
     width: 70vw;
 
@@ -476,7 +476,7 @@ body {
 
 }
 
-@media only screen and (max-width: 370px) {
+@media only screen and (width < 370px) {
   .formWrapper {
     font-size: .75em;
 
@@ -484,7 +484,7 @@ body {
 
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (width < 300px) {
   .navWrapper {
     width: 100vw;
 
@@ -492,7 +492,7 @@ body {
 
 }
 
-@media only screen and (max-width: 250px) {
+@media only screen and (width < 250px) {
   .formWrapper {
     font-size: .5em;
 
