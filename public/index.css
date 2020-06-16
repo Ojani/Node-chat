@@ -144,8 +144,6 @@ button:hover, .dropDownBtn:hover {
 @media only screen and (max-width: 560px) {
   body {
     font-size: 1rem;
-    width: 100vw;
-    overflow: hidden;
 
   }
 
