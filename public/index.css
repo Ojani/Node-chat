@@ -64,6 +64,7 @@ button {
   top: 30%;
   left: 17.25%;
   width: 4.608em;
+  z-index: 10;
 
 }
 
