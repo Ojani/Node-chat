@@ -141,7 +141,7 @@ body {
 
 .messagesWrapper {
   background: #ffffeb;
-  height: 100vh;
+  height: 100%;
   overflow-x: hidden;
   overflow-x: scroll;
   font-size: 1em;

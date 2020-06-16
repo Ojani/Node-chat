@@ -166,6 +166,8 @@ button:hover, .dropDownBtn:hover {
   input {
     width: 75%;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 
   }
 
